@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 var fs = require('fs');
 var users = require('./users.json');
+var header = require('./secret.json');
 var app = express();
 app.use(compress());
 app.use(bodyParser.json());
@@ -59,13 +60,7 @@ function sendSticker(contentMeta, sender){
    var options = {
 	uri: 'https://trialbot-api.line.me/v1/events',
 	method: 'POST',
-	headers: {
-	   'Host': 'trialbot-api.line.me',
-	   'Content-type': 'application/json; charset=UTF-8',
-	   'X-Line-ChannelID': 1465793725,
-	   'X-Line-ChannelSecret': '68eac58053d0746e43946854fd4659f0',
-	   'X-Line-Trusted-User-With-ACL': 'u64d7d55731505e0a1e8664b6d8c53925' 
-	},
+	headers: header,
 	body: {
 	 'to': _.difference(users,[sender]),
  	 'toChannel': 1383378250,
@@ -88,13 +83,7 @@ function sendTextMessage(text,sender){
    var options = {
 	uri: 'https://trialbot-api.line.me/v1/events',
 	method: 'POST',
-	headers: {
-	   'Host': 'trialbot-api.line.me',
-	   'Content-type': 'application/json; charset=UTF-8',
-	   'X-Line-ChannelID': 1465793725,
-	   'X-Line-ChannelSecret': '68eac58053d0746e43946854fd4659f0',
-	   'X-Line-Trusted-User-With-ACL': 'u64d7d55731505e0a1e8664b6d8c53925' 
-	},
+	headers: header,
 	body: {
 	 'to': _.difference(users,[sender]),
  	 'toChannel': 1383378250,
